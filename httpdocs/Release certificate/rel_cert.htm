@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Untitled 1</title>
+<style type="text/css">
+.style1 {
+	border-style: solid;
+	border-width: 1px;
+	padding: 1px 4px;
+	background-color: #FFFFCC;
+	font-family: Arial;
+	font-size: small;
+	margin-top: 2px;
+}
+.style4 {
+	margin-left: 0px;
+}
+.style5 {
+	border-width: 0;
+}
+.style6 {
+	background-color: #FFFFCC;
+}
+</style>
+<script type="text/javascript">
+<!--
+function FP_changeProp() {//v1.0
+ var args=arguments,d=document,i,j,id=args[0],o=FP_getObjectByID(id),s,ao,v,x;
+ d.$cpe=new Array(); if(o) for(i=2; i<args.length; i+=2) { v=args[i+1]; s="o"; 
+ ao=args[i].split("."); for(j=0; j<ao.length; j++) { s+="."+ao[j]; if(null==eval(s)) { 
+  s=null; break; } } x=new Object; x.o=o; x.n=new Array(); x.v=new Array();
+ x.n[x.n.length]=s; eval("x.v[x.v.length]="+s); d.$cpe[d.$cpe.length]=x;
+ if(s) eval(s+"=v"); }
+}
+
+function FP_getObjectByID(id,o) {//v1.0
+ var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+ else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+ if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+ for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+ f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+ for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+ return null;
+}
+
+function FP_changePropRestore() {//v1.0
+ var d=document,x; if(d.$cpe) { for(i=0; i<d.$cpe.length; i++) { x=d.$cpe[i];
+ if(x.v=="") x.v=""; eval("x."+x.n+"=String(x.v)"); } d.$cpe=null; }
+}
+// -->
+</script>
+</head>
+
+<body>
+<div style="position: relative; left: 3px; top: 0px;" class="style4">
+	<div id="layer1" class="style1" style="position: absolute; width: 138px; height: 257px; z-index: 1; left: 566px; top: 211px; visibility: hidden; ">
+		A steady honest character. Has a good knowledge of his Army trade as a 
+		Surveyor, &amp; has done good work for his Unit in Survey and plan preparation 
+		for railway construction and bridging works. Up till 2 years ago he was 
+		employed in this Unit as a Clerk and carried out his duties 
+		satisfactorily. Works well and i<span class="style6">s above average 
+		intelligence.</span></div>
+<p><map id="FPMap0" name="FPMap0">
+<area onmouseover="FP_changeProp(/*id*/'layer1',1,'style.visibility','visible')" onmouseout="FP_changePropRestore()" coords="55, 234, 749, 323" shape="rect" />
+</map>
+<img alt="" height="706"  src="Release cert.jpg" width="750"  usemap="#FPMap0" id="img1" class="style5"        /></p>
+</div>
+</body>
+
+</html>

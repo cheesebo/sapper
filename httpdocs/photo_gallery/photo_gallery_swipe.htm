@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../master.dwt" -->
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<!-- #BeginEditable "doctitle" -->
+<script type="text/javascript">
+	// TOUCH-EVENTS SINGLE-FINGER SWIPE-SENSING JAVASCRIPT
+	// Courtesy of PADILICIOUS.COM and MACOSXAUTOMATION.COM
+	
+	// this script can be used with one or more page elements to perform actions based on them being swiped with a single finger
+
+	var triggerElementID = null; // this variable is used to identity the triggering element
+	var fingerCount = 0;
+	var startX = 0;
+	var startY = 0;
+	var curX = 0;
+	var curY = 0;
+	var deltaX = 0;
+	var deltaY = 0;
+	var horzDiff = 0;
+	var vertDiff = 0;
+	var minLength = 72; // the shortest distance the user may swipe
+	var swipeLength = 0;
+	var swipeAngle = null;
+	var swipeDirection = null;
+	
+	// The 4 Touch Event Handlers
+	
+	// NOTE: the touchStart handler should also receive the ID of the triggering element
+	// make sure its ID is passed in the event call placed in the element declaration, like:
+	// <div id="picture-frame" ontouchstart="touchStart(event,'picture-frame');"  ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+
+	function touchStart(event,passedName) {
+		// disable the standard ability to select the touched object
+		event.preventDefault();
+		// get the total number of fingers touching the screen
+		fingerCount = event.touches.length;
+		// since we're looking for a swipe (single finger) and not a gesture (multiple fingers),
+		// check that only one finger was used
+		if ( fingerCount == 1 ) {
+			// get the coordinates of the touch
+			startX = event.touches[0].pageX;
+			startY = event.touches[0].pageY;
+			// store the triggering element ID
+			triggerElementID = passedName;
+		} else {
+			// more than one finger touched so cancel
+			touchCancel(event);
+		}
+	}
+
+	function touchMove(event) {
+		event.preventDefault();
+		if ( event.touches.length == 1 ) {
+			curX = event.touches[0].pageX;
+			curY = event.touches[0].pageY;
+		} else {
+			touchCancel(event);
+		}
+	}
+	
+	function touchEnd(event) {
+		event.preventDefault();
+		// check to see if more than one finger was used and that there is an ending coordinate
+		if ( fingerCount == 1 && curX != 0 ) {
+			// use the Distance Formula to determine the length of the swipe
+			swipeLength = Math.round(Math.sqrt(Math.pow(curX - startX,2) + Math.pow(curY - startY,2)));
+			// if the user swiped more than the minimum length, perform the appropriate action
+			if ( swipeLength >= minLength ) {
+				caluculateAngle();
+				determineSwipeDirection();
+				processingRoutine();
+				touchCancel(event); // reset the variables
+			} else {
+				touchCancel(event);
+			}	
+		} else {
+			touchCancel(event);
+		}
+	}
+
+	function touchCancel(event) {
+		// reset the variables back to default values
+		fingerCount = 0;
+		startX = 0;
+		startY = 0;
+		curX = 0;
+		curY = 0;
+		deltaX = 0;
+		deltaY = 0;
+		horzDiff = 0;
+		vertDiff = 0;
+		swipeLength = 0;
+		swipeAngle = null;
+		swipeDirection = null;
+		triggerElementID = null;
+	}
+	
+	function caluculateAngle() {
+		var X = startX-curX;
+		var Y = curY-startY;
+		var Z = Math.round(Math.sqrt(Math.pow(X,2)+Math.pow(Y,2))); //the distance - rounded - in pixels
+		var r = Math.atan2(Y,X); //angle in radians (Cartesian system)
+		swipeAngle = Math.round(r*180/Math.PI); //angle in degrees
+		if ( swipeAngle < 0 ) { swipeAngle =  360 - Math.abs(swipeAngle); }
+	}
+	
+	function determineSwipeDirection() {
+		if ( (swipeAngle <= 45) && (swipeAngle >= 0) ) {
+			swipeDirection = 'left';
+		} else if ( (swipeAngle <= 360) && (swipeAngle >= 315) ) {
+			swipeDirection = 'left';
+		} else if ( (swipeAngle >= 135) && (swipeAngle <= 225) ) {
+			swipeDirection = 'right';
+		} else if ( (swipeAngle > 45) && (swipeAngle < 135) ) {
+			swipeDirection = 'down';
+		} else {
+			swipeDirection = 'up';
+		}
+	}
+	
+	function processingRoutine() {
+		var swipedElement = document.getElementById(triggerElementID);
+		if ( swipeDirection == 'left' ) {
+			nextFrame();
+		} else if ( swipeDirection == 'right' ) {
+			prevFrame;
+		} else if ( swipeDirection == 'up' ) {
+			// REPLACE WITH YOUR ROUTINES
+			;
+		} else if ( swipeDirection == 'down' ) {
+			// REPLACE WITH YOUR ROUTINES
+			;
+		}
+	}
+		<!-- Frame Change Routines -->
+
+		function nextFrame()
+		{
+			var iframe = document.getElementById('I7');
+			iframe .src = "lush.htm");
+		}
+
+		function prevFrame()
+		{
+			var iframe = document.getElementById('I7');
+			iframe .src = "potatoes.htm");
+
+}
+</script>
+
+<title></title>
+<style type="text/css">
+
+
+
+.style3 {
+	text-align: center;
+}
+</style>
+<!-- #EndEditable -->
+<link href="../styles/style3.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+<style type="text/css">
+
+.style1 {
+	font-size: larger;
+}
+.style2 {
+	margin-left: 137px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Begin Container -->
+<div id="container">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<h1 class="style1">&nbsp;</h1>
+		<h1 class="style1">Sapper Wood</h1>
+		<p>&nbsp;</p>
+		<h3>Army times of Isaac John Wood</h3>
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin Navigation -->
+	<div id="navigation">
+		<ul>
+			<li class="style2"><a href="../index.html">Sapper Wood</a></li>
+			<li><a href="../war/Johns%20war.htm">John&#39;s War</a></li>
+			<li><a href="../service_book/service_book.htm">Service Book</a></li>
+			<li><a href="../Postings/Postings.htm">Postings</a></li>
+			<li><a href="../Artillery/Artillery.htm">Artillery</a></li>
+			<li><a href="../Engineers/Engineers.htm">Engineers</a></li>
+			<li><a href="photo_gallery.htm">Photos</a></li>
+			<li><a href="../Release%20certificate/release_cert.htm">Release certificate</a></li>
+			<li><a href="../beyond%20the%20war/beyond%20the%20war.htm">Beyond the 
+			war</a></li>
+		</ul>
+	</div>
+	<!-- End Navigation -->
+	<!-- Begin content_container -->
+	<div id="content_container">
+		<!-- Begin Left Column -->
+		<div id="column_left" style="width: 950px">
+			<!-- #BeginEditable "content" -->
+		<div id="content_container0">
+		<div id="column_left0"  ontouchstart="touchStart(event,'swipeBox');" ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);" style="width: 960px" ></div>
+			<h2 style="margin-bottom: 9px" class="style3">Swipe Photos </h2> &nbsp;
+			<iframe id="I7" name="I7" style="width: 746px; height: 495px; margin-left: 0px; float: margin-top: 0px;" frameborder="0" marginwidth="0" scrolling="no" marginheight="0" src="image1.htm">Your browser does not support inline frames or is currently configured not to display inline frames.
+			</iframe>
+						<p style="margin-left: 5px; margin-top: 7px; margin-bottom: 2px; width: 787px; height: 522px;">
+		<!-- End Left Column -->
+		<!-- Begin Footer -->
+		<div id="footer0">
+			<div id="copyright0">
+				<p>Copyright © 2011. All Rights Reserved.</p>
+			</div>
+			<p><a href="../index.html">Home</a> | 
+			<a href="../war/Johns%20war.htm">John&#39;s War</a> |
+			<a href="../service_book/service_book.htm">Service Book</a> | 
+			<a href="../Postings/Postings.htm">Postings</a> |
+			<a href="../Artillery/Artillery.htm">Artillery</a> |
+			<a href="../Engineers/Engineers.htm">Engineers</a> |
+			<a href="photo_gallery_swipe.htm">Photos</a> |
+			<a href="../Release%20certificate/release_cert.htm">Release certificate</a> |
+			<a href="../beyond%20the%20war/beyond%20the%20war.htm">Beyond the war</a></p>
+		</div>
+		<!-- End Footer --></div>
+			
+
+
+
+
+			<!-- #EndEditable --></div>
+		<!-- End Left Column -->
+		<!-- Begin Footer -->
+		<div id="footer">
+			<div id="copyright">
+				<p>Copyright © 2011. All Rights Reserved.</p>
+			</div>
+			<p><a href="../index.html">Sapper Wood</a> | 
+			<a href="../war/Johns%20war.htm">John&#39;s War</a> |
+			<a href="../service_book/service_book.htm">Service Book</a> | 
+			<a href="../Postings/Postings.htm">Postings</a> |
+			<a href="../Artillery/Artillery.htm">Artillery</a> |
+			<a href="../Engineers/Engineers.htm">Engineers</a> |
+			<a href="photo_gallery.htm">Photos</a> |
+			<a href="../Release%20certificate/release_cert.htm">Release certificate</a> |
+			<a href="../beyond%20the%20war/beyond%20the%20war.htm">Beyond the war</a></p>
+		</div>
+		<!-- End Footer --></div>
+	<!-- End content_container --></div>
+<!-- End Container -->
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html>

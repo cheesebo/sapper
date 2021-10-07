@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Untitled 1</title>
+
+<style type="text/css">
+img.expando{
+border: none;
+vertical-align: top;
+}
+h2 {
+	font-size: x-large;
+	color: #333333;
+	margin-top: 0px;
+}
+.style4 {
+	margin-left: 326px;
+}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	text-align: center;
+	font-weight: normal;
+	font-size: medium;
+}
+.style7 {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style8 {
+	border-width: 0px;
+}
+</style>
+<script type="text/javascript">
+<!--
+function FP_changeProp() {//v1.0
+ var args=arguments,d=document,i,j,id=args[0],o=FP_getObjectByID(id),s,ao,v,x;
+ d.$cpe=new Array(); if(o) for(i=2; i<args.length; i+=2) { v=args[i+1]; s="o"; 
+ ao=args[i].split("."); for(j=0; j<ao.length; j++) { s+="."+ao[j]; if(null==eval(s)) { 
+  s=null; break; } } x=new Object; x.o=o; x.n=new Array(); x.v=new Array();
+ x.n[x.n.length]=s; eval("x.v[x.v.length]="+s); d.$cpe[d.$cpe.length]=x;
+ if(s) eval(s+"=v"); }
+}
+
+function FP_getObjectByID(id,o) {//v1.0
+ var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+ else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+ if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+ for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+ f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+ for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+ return null;
+}
+// -->
+</script>
+</head>
+<script type="text/javascript">
+	// TOUCH-EVENTS SINGLE-FINGER SWIPE-SENSING JAVASCRIPT
+	// Courtesy of PADILICIOUS.COM and MACOSXAUTOMATION.COM
+	
+	// this script can be used with one or more page elements to perform actions based on them being swiped with a single finger
+
+	var triggerElementID = null; // this variable is used to identity the triggering element
+	var fingerCount = 0;
+	var startX = 0;
+	var startY = 0;
+	var curX = 0;
+	var curY = 0;
+	var deltaX = 0;
+	var deltaY = 0;
+	var horzDiff = 0;
+	var vertDiff = 0;
+	var minLength = 72; // the shortest distance the user may swipe
+	var swipeLength = 0;
+	var swipeAngle = null;
+	var swipeDirection = null;
+	
+	// The 4 Touch Event Handlers
+	
+	// NOTE: the touchStart handler should also receive the ID of the triggering element
+	// make sure its ID is passed in the event call placed in the element declaration, like:
+	// <div id="picture-frame" ontouchstart="touchStart(event,'picture-frame');"  ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
+
+	function touchStart(event,passedName) {
+		// disable the standard ability to select the touched object
+		event.preventDefault();
+		// get the total number of fingers touching the screen
+		fingerCount = event.touches.length;
+		// since we're looking for a swipe (single finger) and not a gesture (multiple fingers),
+		// check that only one finger was used
+		if ( fingerCount == 1 ) {
+			// get the coordinates of the touch
+			startX = event.touches[0].pageX;
+			startY = event.touches[0].pageY;
+			// store the triggering element ID
+			triggerElementID = passedName;
+		} else {
+			// more than one finger touched so cancel
+			touchCancel(event);
+		}
+	}
+
+	function touchMove(event) {
+		event.preventDefault();
+		if ( event.touches.length == 1 ) {
+			curX = event.touches[0].pageX;
+			curY = event.touches[0].pageY;
+		} else {
+			touchCancel(event);
+		}
+	}
+	
+	function touchEnd(event) {
+		event.preventDefault();
+		// check to see if more than one finger was used and that there is an ending coordinate
+		if ( fingerCount == 1 && curX != 0 ) {
+			// use the Distance Formula to determine the length of the swipe
+			swipeLength = Math.round(Math.sqrt(Math.pow(curX - startX,2) + Math.pow(curY - startY,2)));
+			// if the user swiped more than the minimum length, perform the appropriate action
+			if ( swipeLength >= minLength ) {
+				caluculateAngle();
+				determineSwipeDirection();
+				processingRoutine();
+				touchCancel(event); // reset the variables
+			} else {
+				touchCancel(event);
+			}	
+		} else {
+			touchCancel(event);
+		}
+	}
+
+	function touchCancel(event) {
+		// reset the variables back to default values
+		fingerCount = 0;
+		startX = 0;
+		startY = 0;
+		curX = 0;
+		curY = 0;
+		deltaX = 0;
+		deltaY = 0;
+		horzDiff = 0;
+		vertDiff = 0;
+		swipeLength = 0;
+		swipeAngle = null;
+		swipeDirection = null;
+		triggerElementID = null;
+	}
+	
+	function caluculateAngle() {
+		var X = startX-curX;
+		var Y = curY-startY;
+		var Z = Math.round(Math.sqrt(Math.pow(X,2)+Math.pow(Y,2))); //the distance - rounded - in pixels
+		var r = Math.atan2(Y,X); //angle in radians (Cartesian system)
+		swipeAngle = Math.round(r*180/Math.PI); //angle in degrees
+		if ( swipeAngle < 0 ) { swipeAngle =  360 - Math.abs(swipeAngle); }
+	}
+	
+	function determineSwipeDirection() {
+		if ( (swipeAngle <= 45) && (swipeAngle >= 0) ) {
+			swipeDirection = 'left';
+		} else if ( (swipeAngle <= 360) && (swipeAngle >= 315) ) {
+			swipeDirection = 'left';
+		} else if ( (swipeAngle >= 135) && (swipeAngle <= 225) ) {
+			swipeDirection = 'right';
+		} else if ( (swipeAngle > 45) && (swipeAngle < 135) ) {
+			swipeDirection = 'down';
+		} else {
+			swipeDirection = 'up';
+		}
+	}
+	
+	function processingRoutine() {
+		var swipedElement = document.getElementById(triggerElementID);
+		if ( swipeDirection == 'left' ) {
+			// REPLACE WITH YOUR ROUTINES
+			swipedElement.style.backgroundColor = 'orange';
+		} else if ( swipeDirection == 'right' ) {
+			// REPLACE WITH YOUR ROUTINES
+			swipedElement.style.backgroundColor = 'green';
+		} else if ( swipeDirection == 'up' ) {
+			// REPLACE WITH YOUR ROUTINES
+			swipedElement.style.backgroundColor = 'maroon';
+		} else if ( swipeDirection == 'down' ) {
+			// REPLACE WITH YOUR ROUTINES
+			swipedElement.style.backgroundColor = 'purple';
+		}
+	}
+
+</script>
+
+
+<body bgcolor="#778899">
+<h3 class="style7" style="width: 938px">Royal Artillery</h3>
+<h3 style="width: 938px" class="style5">John Wood - January 1941</h3>
+			&nbsp;
+
+<img class="style4" height="400" src="image1.jpg" width="267" />
+<div id="layer1" style="position: absolute; left: 97px; top: 237px; width: 58px; height: 57px; z-index: 1; right: 947px;">
+	<img alt="" height="50" src="BG_Left_inactive.jpg" width="50" /></div>
+<div id="layer2" style="position: absolute; left: 786px; top: 237px; width: 58px; height: 57px; z-index: 1">
+	<a href="paignton.htm" target="I7">
+	<img alt="" height="50" src="BG_Right_active.jpg" width="50" class="style8" /></a></div>
+
+</body>
+
+</html>
